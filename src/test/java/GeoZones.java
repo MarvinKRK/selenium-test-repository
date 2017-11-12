@@ -47,9 +47,9 @@ public class GeoZones {
         for (String id : countriesID) {
             driver.findElement(By.cssSelector(".dataTable a[href *= 'geo_zone_id=" + id + "']")).click();
 
-            List<WebElement> zonesList = driver.findElements(By.cssSelector("#table-zones tr:not(.header) td:nth-child(3) [selected]"));
+            List<WebElement> zonesList = driver.findElements(By.cssSelector("#table-zones td:nth-child(3) [selected]"));
             if (zonesList.size() == 0)
-                zonesList = driver.findElements(By.cssSelector("#table-zones tr:not(.header) td:nth-child(2) [selected]"));
+                zonesList = driver.findElements(By.cssSelector("#table-zones td:nth-child(2) [selected]"));
 
             List<String> zones = new ArrayList<>();
             for (WebElement zone : zonesList) {

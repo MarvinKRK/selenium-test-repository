@@ -55,11 +55,11 @@ public class Countries {
         for (String code : countriesWithZones) {
             driver.findElement(By.cssSelector(".dataTable a[href *= 'country_code=" + code + "']")).click();
 
-            List<WebElement> zonesList = driver.findElements(By.cssSelector("#table-zones tr:not(.header)"));
+            List<WebElement> zonesList = driver.findElements(By.cssSelector("#table-zones td:nth-child(3)"));
             List<String> zones = new ArrayList<>();
             for (WebElement zone : zonesList) {
-                if (!zone.findElement(By.cssSelector("td:nth-child(2) > input")).getAttribute("value").equals("")) {
-                    zones.add(zone.findElement(By.cssSelector("td:nth-child(3)")).getText());
+                if (!zone.findElement(By.cssSelector("input")).getAttribute("value").equals("")) {
+                    zones.add(zone.getText());
                 }
             }
 
