@@ -38,7 +38,7 @@ public class Articles {
             String articleCampaignPrice = campaignPrice.getText();
 
             assertEquals(regularPrice.getCssValue("color"), "rgba(119, 119, 119, 1)", "Color is wrong.");
-            assertEquals(regularPrice.getCssValue("text-decoration"), "line-through solid rgb(119, 119, 119)", "Price is not strikethrough.");
+            assertEquals(regularPrice.getCssValue("text-decoration-line"), "line-through", "Price is not strikethrough.");
             assertEquals(campaignPrice.getCssValue("color"), "rgba(204, 0, 0, 1)", "Color is wrong.");
             assertEquals(campaignPrice.getCssValue("font-weight"), "700", "Price is not bold.");
 
@@ -51,7 +51,7 @@ public class Articles {
             campaignPrice = driver.findElement(By.cssSelector(".campaign-price"));
 
             assertEquals(regularPrice.getCssValue("color"), "rgba(102, 102, 102, 1)", "Color is wrong.");
-            assertEquals(regularPrice.getCssValue("text-decoration"), "line-through solid rgb(102, 102, 102)", "Price is not strikethrough.");
+            assertEquals(regularPrice.getCssValue("text-decoration-line"), "line-through", "Price is not strikethrough.");
             assertEquals(campaignPrice.getCssValue("color"), "rgba(204, 0, 0, 1)", "Color is wrong.");
             assertEquals(campaignPrice.getCssValue("font-weight"), "700", "Price is not bold.");
         }
