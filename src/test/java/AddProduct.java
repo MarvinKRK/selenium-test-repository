@@ -1,16 +1,18 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.testng.Assert.assertTrue;
 
 public class AddProduct {
     private WebDriver driver;
@@ -63,7 +65,16 @@ public class AddProduct {
         driver.findElement(By.cssSelector("[name='gross_prices[EUR]']")).sendKeys("1,23");
         driver.findElement(By.cssSelector("[name='save'")).click();
 
-        wait.until(ExpectedConditions.textToBe(By.cssSelector(".row a[href *= 'product_id']:nth-child(2)"), product));
+        assertTrue(isProductInCatalog(driver.findElements(By.cssSelector(".row > td:nth-child(3) a")), product));
+    }
+
+    private boolean isProductInCatalog(List<WebElement> elements, String product) {
+        for (WebElement element : elements) {
+            if (element.getText().equals(product)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @AfterTest
