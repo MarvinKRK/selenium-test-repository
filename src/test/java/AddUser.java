@@ -23,7 +23,8 @@ public class AddUser {
 
     @Test()
     public void addUser() {
-        String email = "test7@example.com";
+        int id = 0;
+        String email = "test" + (++id) + "@example.com";
         String password = "password123";
         driver.get("http://localhost/litecart/");
 
@@ -38,6 +39,16 @@ public class AddUser {
         driver.findElement(By.cssSelector("[name='password']")).sendKeys(password);
         driver.findElement(By.cssSelector("[name='confirmed_password']")).sendKeys(password);
         driver.findElement(By.cssSelector("[name='create_account']")).click();
+
+        while (driver.findElements(By.cssSelector(".notice.errors")).size() > 0) {
+            email = "test" + (++id) + "@example.com";
+            driver.findElement(By.cssSelector("[name='email']")).clear();
+            driver.findElement(By.cssSelector("[name='email']")).sendKeys(email);
+            driver.findElement(By.cssSelector("[name='password']")).sendKeys(password);
+            driver.findElement(By.cssSelector("[name='confirmed_password']")).sendKeys(password);
+            driver.findElement(By.cssSelector("[name='create_account']")).click();
+        }
+
         wait.until(visibilityOfElementLocated(By.cssSelector("#box-account")));
 
         driver.findElement(By.cssSelector("#box-account li:nth-child(4) > a")).click();
